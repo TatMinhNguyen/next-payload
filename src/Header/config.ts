@@ -11,18 +11,34 @@ export const Header: GlobalConfig = {
   fields: [
     {
       name: 'navItems',
-      type: 'array',
-      fields: [
-        link({
-          appearances: false,
-        }),
+      label: 'Navigation',
+      type: 'blocks',
+      blocks: [
+        {
+          slug: 'linkItem',
+          labels: { singular: 'Link', plural: 'Links' },
+          fields: [link({ appearances: false })],
+        },
+        {
+          slug: 'dropdown',
+          labels: { singular: 'Dropdown', plural: 'Dropdowns' },
+          fields: [
+            {
+              name: 'label',
+              type: 'text',
+              required: true,
+            },
+            {
+              name: 'dropdownItems',
+              type: 'array',
+              admin: { initCollapsed: true },
+              fields: [link({ appearances: false })],
+            },
+          ],
+        },
       ],
-      maxRows: 6,
       admin: {
         initCollapsed: true,
-        components: {
-          RowLabel: '@/Header/RowLabel#RowLabel',
-        },
       },
     },
   ],

@@ -30,12 +30,25 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   }, [headerTheme])
 
   return (
-    <header className="container relative z-20   " {...(theme ? { 'data-theme': theme } : {})}>
-      <div className="py-8 flex justify-between">
+    <header className="px-8 relative z-20 flex items-center justify-between" {...(theme ? { 'data-theme': theme } : {})}>
+      <div className="py-3 flex items-center gap-[60px]">
         <Link href="/">
-          <Logo loading="eager" priority="high" className="invert dark:invert-0" />
+          <Logo loading="eager" priority="high" className="dark:invert-0" />
         </Link>
         <HeaderNav data={data} />
+      </div>
+      {/* right header */}
+      <div className="flex gap-4">
+        <button className="py-2 px-6 rounded-xl bg-[#3a18ce] text-white text-[22px] leading-[30px] cursor-pointer"
+          onClick={() => window.location.href = "https://app.clickee.ai/auth/login"}
+        >
+          Đăng nhập
+        </button>
+        <button className="py-2 px-6 rounded-xl bg-[#26d06d] text-white text-[22px] leading-[30px] cursor-pointer"
+          onClick={() => window.location.href = "https://app.clickee.ai/auth/sign-up"}
+        >
+          Đăng kí
+        </button>
       </div>
     </header>
   )
