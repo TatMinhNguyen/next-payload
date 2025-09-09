@@ -9,21 +9,43 @@ export const Footer: GlobalConfig = {
     read: () => true,
   },
   fields: [
+    { name: 'companyName', type: 'text', required: true },
+    { name: 'taxId', label: 'MSDN / Tax ID', type: 'text' },
+    { name: 'address', type: 'textarea' },
+    { name: 'hotline', type: 'text' },
+    { name: 'email', type: 'email' },
     {
-      name: 'navItems',
+      name: 'policies',
       type: 'array',
+      admin: { initCollapsed: true },
+      fields: [link({ appearances: false })],
+    },
+    {
+      name: 'supports',
+      type: 'array',
+      admin: { initCollapsed: true },
+      fields: [link({ appearances: false })],
+    },
+    {
+      name: 'socialLinks',
+      type: 'array',
+      admin: { initCollapsed: true },
       fields: [
-        link({
-          appearances: false,
-        }),
-      ],
-      maxRows: 6,
-      admin: {
-        initCollapsed: true,
-        components: {
-          RowLabel: '@/Footer/RowLabel#RowLabel',
+        {
+          name: 'platform',
+          type: 'select',
+          required: true,
+          options: [
+            { label: 'Facebook', value: 'facebook' },
+            { label: 'Zalo', value: 'zalo' },
+            { label: 'YouTube', value: 'youtube' },
+            { label: 'Messenger', value: 'messenger' },
+            { label: 'TikTok', value: 'tiktok' },
+            { label: 'LinkedIn', value: 'linkedin' },
+          ],
         },
-      },
+        link({ appearances: false }),
+      ],
     },
   ],
   hooks: {

@@ -1611,8 +1611,54 @@ export interface Header {
  */
 export interface Footer {
   id: string;
-  navItems?:
+  companyName: string;
+  taxId?: string | null;
+  address?: string | null;
+  hotline?: string | null;
+  email?: string | null;
+  policies?:
     | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  supports?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  socialLinks?:
+    | {
+        platform: 'facebook' | 'zalo' | 'youtube' | 'messenger' | 'tiktok' | 'linkedin';
         link: {
           type?: ('reference' | 'custom') | null;
           newTab?: boolean | null;
@@ -1688,9 +1734,43 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
-  navItems?:
+  companyName?: T;
+  taxId?: T;
+  address?: T;
+  hotline?: T;
+  email?: T;
+  policies?:
     | T
     | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  supports?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+            };
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        platform?: T;
         link?:
           | T
           | {
