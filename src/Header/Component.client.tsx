@@ -8,6 +8,7 @@ import type { Header } from '@/payload-types'
 
 import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
+import Button from '@/common/Button'
 
 interface HeaderClientProps {
   data: Header
@@ -39,16 +40,16 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
       </div>
       {/* right header */}
       <div className="flex gap-4">
-        <button className="py-2 px-6 rounded-xl bg-[#3a18ce] text-white text-[22px] leading-[30px] cursor-pointer"
+        <Button variant='navy' className="text-[20px] leading-[30px]"
           onClick={() => window.location.href = "https://app.clickee.ai/auth/login"}
         >
           Đăng nhập
-        </button>
-        <button className="py-2 px-6 rounded-xl bg-[#26d06d] text-white text-[22px] leading-[30px] cursor-pointer"
+        </Button>
+        <Button variant='green' size='md' className="text-[20px] leading-[30px]"
           onClick={() => window.location.href = "https://app.clickee.ai/auth/sign-up"}
         >
           Đăng kí
-        </button>
+        </Button>
       </div>
     </header>
   )

@@ -191,7 +191,161 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (
+    | {
+        banners?:
+          | {
+              background?: (string | null) | Media;
+              mainImage?: (string | null) | Media;
+              secondaryImage?: (string | null) | Media;
+              mainImageClass?: string | null;
+              ellipse?: boolean | null;
+              title: string;
+              description?:
+                | {
+                    text: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              buttonText?: string | null;
+              buttonClass?: string | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'hero';
+      }
+    | {
+        title: string;
+        subtitle?: string | null;
+        description?: string | null;
+        features?:
+          | {
+              title: string;
+              description: string;
+              icon?: (string | null) | Media;
+              color?: ('blue' | 'green' | 'orange' | 'pink' | 'purple') | null;
+              id?: string | null;
+            }[]
+          | null;
+        screenshot?: (string | null) | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'features';
+      }
+    | {
+        title: string;
+        tabs?:
+          | {
+              label: string;
+              value: string;
+              features?:
+                | {
+                    title: string;
+                    description: string;
+                    icon?: (string | null) | Media;
+                    id?: string | null;
+                  }[]
+                | null;
+              ctaButton?: {
+                text?: string | null;
+                url?: string | null;
+              };
+              screenshot?: (string | null) | Media;
+              id?: string | null;
+            }[]
+          | null;
+        activeTab?: string | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'service';
+      }
+    | {
+        title: string;
+        subtitle?: string | null;
+        monthlyPackages?: {
+          title?: string | null;
+          packages?:
+            | {
+                name: string;
+                price: string;
+                description?: string | null;
+                ctaText?: string | null;
+                ctaUrl?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        perSubmissionPackages?: {
+          title?: string | null;
+          packages?:
+            | {
+                name: string;
+                price: string;
+                description?: string | null;
+                ctaText?: string | null;
+                ctaUrl?: string | null;
+                id?: string | null;
+              }[]
+            | null;
+        };
+        viewDetailsButton?: {
+          text?: string | null;
+          url?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'pricing';
+      }
+    | {
+        title: string;
+        testimonials?:
+          | {
+              name: string;
+              avatar?: (string | null) | Media;
+              content: string;
+              rating?: number | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'testimonials';
+      }
+    | {
+        title: string;
+        questions?:
+          | {
+              question: string;
+              answer: {
+                root: {
+                  type: string;
+                  children: {
+                    type: string;
+                    version: number;
+                    [k: string]: unknown;
+                  }[];
+                  direction: ('ltr' | 'rtl') | null;
+                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                  indent: number;
+                  version: number;
+                };
+                [k: string]: unknown;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'faq';
+      }
+    | CallToActionBlock
+    | ContentBlock
+    | MediaBlock
+    | ArchiveBlock
+    | FormBlock
+  )[];
   meta?: {
     title?: string | null;
     /**
@@ -1020,6 +1174,154 @@ export interface PagesSelect<T extends boolean = true> {
   layout?:
     | T
     | {
+        hero?:
+          | T
+          | {
+              banners?:
+                | T
+                | {
+                    background?: T;
+                    mainImage?: T;
+                    secondaryImage?: T;
+                    mainImageClass?: T;
+                    ellipse?: T;
+                    title?: T;
+                    description?:
+                      | T
+                      | {
+                          text?: T;
+                          id?: T;
+                        };
+                    buttonText?: T;
+                    buttonClass?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        features?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              description?: T;
+              features?:
+                | T
+                | {
+                    title?: T;
+                    description?: T;
+                    icon?: T;
+                    color?: T;
+                    id?: T;
+                  };
+              screenshot?: T;
+              id?: T;
+              blockName?: T;
+            };
+        service?:
+          | T
+          | {
+              title?: T;
+              tabs?:
+                | T
+                | {
+                    label?: T;
+                    value?: T;
+                    features?:
+                      | T
+                      | {
+                          title?: T;
+                          description?: T;
+                          icon?: T;
+                          id?: T;
+                        };
+                    ctaButton?:
+                      | T
+                      | {
+                          text?: T;
+                          url?: T;
+                        };
+                    screenshot?: T;
+                    id?: T;
+                  };
+              activeTab?: T;
+              id?: T;
+              blockName?: T;
+            };
+        pricing?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              monthlyPackages?:
+                | T
+                | {
+                    title?: T;
+                    packages?:
+                      | T
+                      | {
+                          name?: T;
+                          price?: T;
+                          description?: T;
+                          ctaText?: T;
+                          ctaUrl?: T;
+                          id?: T;
+                        };
+                  };
+              perSubmissionPackages?:
+                | T
+                | {
+                    title?: T;
+                    packages?:
+                      | T
+                      | {
+                          name?: T;
+                          price?: T;
+                          description?: T;
+                          ctaText?: T;
+                          ctaUrl?: T;
+                          id?: T;
+                        };
+                  };
+              viewDetailsButton?:
+                | T
+                | {
+                    text?: T;
+                    url?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        testimonials?:
+          | T
+          | {
+              title?: T;
+              testimonials?:
+                | T
+                | {
+                    name?: T;
+                    avatar?: T;
+                    content?: T;
+                    rating?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        faq?:
+          | T
+          | {
+              title?: T;
+              questions?:
+                | T
+                | {
+                    question?: T;
+                    answer?: T;
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
         cta?: T | CallToActionBlockSelect<T>;
         content?: T | ContentBlockSelect<T>;
         mediaBlock?: T | MediaBlockSelect<T>;

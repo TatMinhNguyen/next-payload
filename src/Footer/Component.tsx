@@ -1,12 +1,20 @@
 import { getCachedGlobal } from '@/utilities/getGlobals'
-import Link from 'next/link'
 import React from 'react'
+import type { StaticImageData } from 'next/image'
 
 import type { Footer } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
 import Image from 'next/image'
-import { Logo } from '@/components/Logo/Logo'
+
+// Import social icons
+import facebookIcon from '@/assets/icons/social/facebook.svg'
+import zaloIcon from '@/assets/icons/social/zalo.svg'
+import youtubeIcon from '@/assets/icons/social/youtube.svg'
+import messengerIcon from '@/assets/icons/social/messenger.svg'
+import tiktokIcon from '@/assets/icons/social/tiktok.svg'
+import linkedinIcon from '@/assets/icons/social/linkedin.svg'
+import Button from '@/common/Button'
 
 export async function Footer() {
   const footerData: Footer = await getCachedGlobal('footer', 1)()
@@ -91,16 +99,16 @@ export async function Footer() {
             <input
               type="text"
               placeholder="Họ và tên"
-              className="w-full px-4 py-3 rounded-md bg-[#1C2E8A] placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-3 rounded-xl bg-[#1C2E8A] placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             <input
               type="email"
               placeholder="Nhập Email"
-              className="w-full px-4 py-3 rounded-md bg-[#1C2E8A] placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full px-4 py-3 rounded-xl bg-[#1C2E8A] placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
-            <button className="w-full bg-[#3BB2F6] text-white font-semibold py-3 rounded-md hover:bg-blue-400 transition">
-              Gửi liên hệ
-            </button>
+            <div className="w-full flex justify-center">
+              <Button variant="sky">Gửi liên hệ</Button>
+            </div>
           </div>
 
           {/* Social */}
@@ -108,16 +116,16 @@ export async function Footer() {
             <h3 className="font-bold mt-9">KẾT NỐI VỚI CHÚNG TÔI</h3>
             <div className="flex justify-center gap-8">
               {socialLinks.map(({ platform, link }, i) => {
-                const iconMap: Record<string, string> = {
-                  facebook: '/icons/facebook.svg',
-                  zalo: '/icons/zalo.svg',
-                  youtube: '/icons/youtube.svg',
-                  messenger: '/icons/messenger.svg',
-                  tiktok: '/icons/tiktok.svg',
-                  linkedin: '/icons/linkedin.svg',
+                const iconMap: Record<string, StaticImageData> = {
+                  facebook: facebookIcon,
+                  zalo: zaloIcon,
+                  youtube: youtubeIcon,
+                  messenger: messengerIcon,
+                  tiktok: tiktokIcon,
+                  linkedin: linkedinIcon,
                 }
                 const href = link?.type === 'custom' ? link?.url : '#'
-                const icon = iconMap[platform] || '/icons/link.svg'
+                const icon = iconMap[platform] || facebookIcon // fallback to facebook icon
                 return (
                   <a
                     key={i}

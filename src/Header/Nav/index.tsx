@@ -68,13 +68,15 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
           <div
             className={`flex items-center text-[22px] leading-[30px] font-[500] hover:text-[#2196f3] cursor-pointer ${pathname === link.href || (link.hasDropdown && link.dropdownItems?.some((item) => item.href === pathname))
               ? 'text-[#3A18CE]'
-              : ''
+              : 'text-[#09196b]'
               }`}
             onClick={() => !link.hasDropdown && router.push(link.href)}
           >
             {link.name}
             {link.hasDropdown && (
-              <svg className="text-[14px] ml-2 mt-0.5" viewBox="0 0 20 20" fill="currentColor" width="14" height="14"><path fillRule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.25a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clipRule="evenodd" /></svg>
+              <svg className="text-[14px] ml-2 mt-1" viewBox="0 0 12 12" fill="currentColor" width="16" height="16">
+                <path d="M6 8L2 4h8L6 8z" />
+              </svg>
             )}
           </div>
           {link.hasDropdown && openDropdown === link.name && (

@@ -19,7 +19,7 @@ export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
                 format: 0,
                 mode: 'normal',
                 style: '',
-                text: 'Payload Website Template',
+                text: 'Clickee - Công cụ hỗ trợ thi IELTS',
                 version: 1,
               },
             ],
@@ -81,7 +81,7 @@ export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
   },
   meta: {
     description: 'An open-source website built with Payload and Next.js.',
-    title: 'Payload Website Template',
+    title: 'Clickee - Công cụ hỗ trợ thi IELTS',
   },
   title: 'Home',
   layout: [],
