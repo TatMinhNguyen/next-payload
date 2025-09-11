@@ -1,118 +1,176 @@
 'use client'
-import React, { useState } from 'react'
-import Image from 'next/image'
-import { CMSLink } from '@/components/Link'
 
-type Tab = {
-  label: string
-  value: string
-  features: Array<{
-    title: string
-    description: string
-    icon?: any
-  }>
-  ctaButton: {
-    text: string
-    url: string
-  }
-  screenshot?: any
+import Image from 'next/image'
+
+type Media = {
+  url: string
+  alt?: string
+}
+
+type Content = {
+  title: string
+  description: string
+  icon?: Media
+}
+
+type ServiceItem = {
+  title: string
+  image: Media
+  contents: Content[]
+  videoUrl: string
+  buttonContent: string
 }
 
 type ServiceBlockProps = {
   title: string
-  tabs: Tab[]
-  activeTab?: string
+  subtitle?: string
+  role?: { title: string }[]
+  students: ServiceItem[]
+  teachers: ServiceItem[]
 }
 
-export const ServiceBlock: React.FC<ServiceBlockProps> = ({
+export default function ServiceBlock({
   title,
-  tabs,
-  activeTab = 'writing',
-}) => {
-  const [currentTab, setCurrentTab] = useState(activeTab)
-
-  const activeTabData = tabs.find(tab => tab.value === currentTab) || tabs[0]
-
+  subtitle,
+  role,
+  students,
+  teachers,
+}: ServiceBlockProps) {
   return (
-    <div className="py-20 bg-gradient-to-br from-[#3A18CE] to-[#09196b] text-white">
-      <div className="container">
-        {/* Tabs */}
-        <div className="flex justify-center mb-12">
-          <div className="bg-white/10 rounded-lg p-1 flex">
-            {tabs.map((tab) => (
-              <button
-                key={tab.value}
-                onClick={() => setCurrentTab(tab.value)}
-                className={`px-6 py-3 rounded-md transition-colors ${currentTab === tab.value
-                    ? 'bg-white text-[#3A18CE] font-semibold'
-                    : 'text-white hover:bg-white/10'
-                  }`}
+    <section className="w-full py-12 px-4">
+      {/* Header */}
+      <div className="text-center mb-10">
+        <h2 className="text-3xl font-bold">{title}</h2>
+        {subtitle && <p className="text-gray-600 mt-2">{subtitle}</p>}
+        {role && (
+          <div className="flex gap-3 justify-center mt-4">
+            {role.map((r, i) => (
+              <span
+                key={i}
+                className="px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded-full"
               >
-                {tab.label}
-              </button>
+                {r.title}
+              </span>
             ))}
           </div>
-        </div>
+        )}
+      </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Content */}
-          <div>
-            <h2 className="text-4xl lg:text-5xl font-bold mb-8">
-              {title}
-            </h2>
-
-            <div className="space-y-6 mb-8">
-              {activeTabData.features.map((feature, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  {feature.icon && (
-                    <div className="flex-shrink-0">
-                      <Image
-                        src={feature.icon.url}
-                        alt={feature.icon.alt || 'Feature icon'}
-                        width={24}
-                        height={24}
-                        className="w-6 h-6 mt-1"
-                      />
-                    </div>
-                  )}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-200">
-                      {feature.description}
-                    </p>
-                  </div>
+      {/* Students */}
+      <div className="mb-12">
+        <h3 className="text-2xl font-semibold mb-6">Student Services</h3>
+        <div className="grid md:grid-cols-2 gap-8">
+          {students?.map((s, i) => (
+            <div
+              key={i}
+              className="p-6 rounded-2xl shadow-md bg-white flex flex-col gap-4"
+            >
+              {/* Thumbnail */}
+              {s.image?.url && (
+                <div className="w-full h-48 relative rounded-lg overflow-hidden">
+                  <Image
+                    src={s.image.url}
+                    alt={s.image.alt || s.title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-              ))}
-            </div>
+              )}
+              <h4 className="text-xl font-bold">{s.title}</h4>
 
-            {activeTabData.ctaButton && (
-              <CMSLink
-                url={activeTabData.ctaButton.url}
-                className="inline-block bg-white text-[#3A18CE] font-semibold px-8 py-4 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                {activeTabData.ctaButton.text}
-              </CMSLink>
-            )}
-          </div>
+              {/* Contents */}
+              <ul className="flex flex-col gap-3">
+                {s.contents?.map((c, j) => (
+                  <li key={j} className="flex items-start gap-3">
+                    {c.icon?.url && (
+                      <Image
+                        src={c.icon.url}
+                        alt={c.icon.alt || c.title}
+                        width={32}
+                        height={32}
+                      />
+                    )}
+                    <div>
+                      <h5 className="font-semibold">{c.title}</h5>
+                      <p className="text-gray-600 text-sm">{c.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
 
-          {/* Screenshot */}
-          {activeTabData.screenshot && (
-            <div className="relative">
-              <div className="bg-white rounded-2xl p-8 shadow-2xl">
-                <Image
-                  src={activeTabData.screenshot.url}
-                  alt={activeTabData.screenshot.alt || 'Service screenshot'}
-                  width={600}
-                  height={400}
-                  className="w-full h-auto rounded-lg"
-                />
-              </div>
+              {/* Video */}
+              {s.videoUrl && (
+                <div className="aspect-video mt-4">
+                  <iframe
+                    src={s.videoUrl}
+                    title={s.title}
+                    className="w-full h-full rounded-lg"
+                    allowFullScreen
+                  />
+                </div>
+              )}
             </div>
-          )}
+          ))}
         </div>
       </div>
-    </div>
+
+      {/* Teachers */}
+      <div>
+        <h3 className="text-2xl font-semibold mb-6">Teacher Services</h3>
+        <div className="grid md:grid-cols-2 gap-8">
+          {teachers?.map((t, i) => (
+            <div
+              key={i}
+              className="p-6 rounded-2xl shadow-md bg-white flex flex-col gap-4"
+            >
+              {/* Thumbnail */}
+              {t.image?.url && (
+                <div className="w-full h-48 relative rounded-lg overflow-hidden">
+                  <Image
+                    src={t.image.url}
+                    alt={t.image.alt || t.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              )}
+              <h4 className="text-xl font-bold">{t.title}</h4>
+
+              {/* Contents */}
+              <ul className="flex flex-col gap-3">
+                {t.contents?.map((c, j) => (
+                  <li key={j} className="flex items-start gap-3">
+                    {c.icon?.url && (
+                      <Image
+                        src={c.icon.url}
+                        alt={c.icon.alt || c.title}
+                        width={32}
+                        height={32}
+                      />
+                    )}
+                    <div>
+                      <h5 className="font-semibold">{c.title}</h5>
+                      <p className="text-gray-600 text-sm">{c.description}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Video */}
+              {t.videoUrl && (
+                <div className="aspect-video mt-4">
+                  <iframe
+                    src={t.videoUrl}
+                    title={t.title}
+                    className="w-full h-full rounded-lg"
+                    allowFullScreen
+                  />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
