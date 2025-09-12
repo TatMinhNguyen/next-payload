@@ -30,6 +30,15 @@ export const ServiceBlock: Block = {
           type: 'text',
           required: true,
         },
+        {
+          name: 'selectedRole',
+          type: 'select',
+          options: [
+            { label: 'Student', value: 'student' },
+            { label: 'Teacher', value: 'teacher' },
+          ],
+          defaultValue: 'student',
+        },
       ],
     },
     {

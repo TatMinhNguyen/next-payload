@@ -240,6 +240,7 @@ export interface Page {
         role?:
           | {
               title: string;
+              selectedRole?: ('student' | 'teacher') | null;
               id?: string | null;
             }[]
           | null;
@@ -284,31 +285,56 @@ export interface Page {
     | {
         title: string;
         subtitle?: string | null;
-        monthlyPackages?: {
-          title?: string | null;
-          packages?:
-            | {
-                name: string;
-                price: string;
-                description?: string | null;
-                ctaText?: string | null;
-                ctaUrl?: string | null;
-                id?: string | null;
-              }[]
-            | null;
-        };
-        perSubmissionPackages?: {
-          title?: string | null;
-          packages?:
-            | {
-                name: string;
-                price: string;
-                description?: string | null;
-                ctaText?: string | null;
-                ctaUrl?: string | null;
-                id?: string | null;
-              }[]
-            | null;
+        audiences?:
+          | {
+              audienceName: string;
+              packages?:
+                | {
+                    /**
+                     * Ví dụ: 1, 3, 6, 12 tương đương với 1 tháng, 3 tháng, 6 tháng, 12 tháng
+                     */
+                    duration: string;
+                    originalPrice: string;
+                    discountPrice: string;
+                    currency?: string | null;
+                    ctaText?: string | null;
+                    /**
+                     * Ví dụ: #3A18CE
+                     */
+                    ctaColor?: string | null;
+                    ctaUrl?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              features?:
+                | {
+                    feature: string;
+                    id?: string | null;
+                  }[]
+                | null;
+              warning?:
+                | {
+                    warningText?: string | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        isDiscount?: boolean | null;
+        /**
+         * Ví dụ: Nhập mã CLICKEE29 giảm 30%
+         */
+        discountNote?: string | null;
+        discountPeriod?: {
+          /**
+           * Ngày bắt đầu khuyến mãi
+           */
+          startDate?: string | null;
+          /**
+           * Ngày kết thúc khuyến mãi
+           */
+          endDate?: string | null;
         };
         viewDetailsButton?: {
           text?: string | null;
@@ -1101,6 +1127,7 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     title?: T;
+                    selectedRole?: T;
                     id?: T;
                   };
               students?:
@@ -1145,35 +1172,43 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               title?: T;
               subtitle?: T;
-              monthlyPackages?:
+              audiences?:
                 | T
                 | {
-                    title?: T;
+                    audienceName?: T;
                     packages?:
                       | T
                       | {
-                          name?: T;
-                          price?: T;
-                          description?: T;
+                          duration?: T;
+                          originalPrice?: T;
+                          discountPrice?: T;
+                          currency?: T;
                           ctaText?: T;
+                          ctaColor?: T;
                           ctaUrl?: T;
                           id?: T;
                         };
+                    features?:
+                      | T
+                      | {
+                          feature?: T;
+                          id?: T;
+                        };
+                    warning?:
+                      | T
+                      | {
+                          warningText?: T;
+                          id?: T;
+                        };
+                    id?: T;
                   };
-              perSubmissionPackages?:
+              isDiscount?: T;
+              discountNote?: T;
+              discountPeriod?:
                 | T
                 | {
-                    title?: T;
-                    packages?:
-                      | T
-                      | {
-                          name?: T;
-                          price?: T;
-                          description?: T;
-                          ctaText?: T;
-                          ctaUrl?: T;
-                          id?: T;
-                        };
+                    startDate?: T;
+                    endDate?: T;
                   };
               viewDetailsButton?:
                 | T

@@ -21,7 +21,6 @@ type Banner = {
 }
 
 export const HeroBlock: React.FC<{ banners: Banner[] }> = ({ banners }) => {
-  console.log('banners', banners)
   const CMS_URL = process.env.NEXT_PUBLIC_CMS_URL || 'http://localhost:3000'
 
   const router = useRouter()
