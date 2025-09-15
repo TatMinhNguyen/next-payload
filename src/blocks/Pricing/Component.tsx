@@ -208,8 +208,10 @@ export const PricingBlock: React.FC<PricingBlockProps> = ({
                         </div>
                       </div>
                       <Button variant='navy' size='md'
-                        className={`${pkg.ctaColor ? `bg-[${pkg.ctaColor}]` : ''}`}
                         onClick={() => window.location.href = pkg.ctaUrl || '#'}
+                        style={{
+                          backgroundColor: pkg.ctaColor
+                        }}
                       >
                         {pkg.ctaText || 'MUA NGAY'}
                       </Button>

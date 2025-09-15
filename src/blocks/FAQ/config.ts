@@ -11,6 +11,7 @@ export const FAQBlock: Block = {
     {
       name: 'questions',
       type: 'array',
+      required: true,
       fields: [
         {
           name: 'question',
@@ -19,7 +20,7 @@ export const FAQBlock: Block = {
         },
         {
           name: 'answer',
-          type: 'richText',
+          type: 'textarea',
           required: true,
         },
       ],

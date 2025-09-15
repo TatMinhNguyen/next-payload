@@ -71,7 +71,10 @@ export const HeroBlock: Block = {
         {
           name: 'buttonClass',
           type: 'text',
-          defaultValue: 'bg-[#36a6ff]',
+          defaultValue: '#36A6FF',
+          admin: {
+            description: 'Ví dụ: #36A6FF',
+          },
         },
       ],
     },

@@ -3,7 +3,8 @@ import type { CollectionConfig } from 'payload'
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { FormBlock } from '../../blocks/Form/config'
-import { MediaBlock } from '../../blocks/MediaBlock/config'
+// import { MediaBlock } from '../../blocks/MediaBlock/config'
+import { CallToAction } from '@/blocks/CallToAction/config'
 import { HeroBlock } from '../../blocks/Hero/config'
 import { FeaturesBlock } from '../../blocks/Features/config'
 import { ServiceBlock } from '../../blocks/Service/config'
@@ -85,7 +86,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 PricingBlock,
                 TestimonialsBlock,
                 FAQBlock,
-                // CallToAction,
+                CallToAction,
                 // Content,
                 // MediaBlock,
                 // Archive,

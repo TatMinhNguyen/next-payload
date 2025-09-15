@@ -208,6 +208,9 @@ export interface Page {
                   }[]
                 | null;
               buttonText?: string | null;
+              /**
+               * Ví dụ: #36A6FF
+               */
               buttonClass?: string | null;
               id?: string | null;
             }[]
@@ -346,12 +349,16 @@ export interface Page {
       }
     | {
         title: string;
+        subtitle: string;
         testimonials?:
           | {
               name: string;
               avatar?: (string | null) | Media;
               content: string;
-              rating?: number | null;
+              /**
+               * ví dụ: Giáo viên Thinkslab
+               */
+              occupation: string;
               id?: string | null;
             }[]
           | null;
@@ -361,31 +368,16 @@ export interface Page {
       }
     | {
         title: string;
-        questions?:
-          | {
-              question: string;
-              answer: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
-                    [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              };
-              id?: string | null;
-            }[]
-          | null;
+        questions: {
+          question: string;
+          answer: string;
+          id?: string | null;
+        }[];
         id?: string | null;
         blockName?: string | null;
         blockType: 'faq';
       }
+    | CallToActionBlock
     | FormBlock
   )[];
   meta?: {
@@ -587,6 +579,22 @@ export interface User {
       }[]
     | null;
   password?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock".
+ */
+export interface CallToActionBlock {
+  background: string | Media;
+  title: string;
+  description: string;
+  viewButton: {
+    buttonText?: string | null;
+    url?: string | null;
+  };
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'cta';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1223,13 +1231,14 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               title?: T;
+              subtitle?: T;
               testimonials?:
                 | T
                 | {
                     name?: T;
                     avatar?: T;
                     content?: T;
-                    rating?: T;
+                    occupation?: T;
                     id?: T;
                   };
               id?: T;
@@ -1249,6 +1258,7 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        cta?: T | CallToActionBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
       };
   meta?:
@@ -1264,6 +1274,23 @@ export interface PagesSelect<T extends boolean = true> {
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "CallToActionBlock_select".
+ */
+export interface CallToActionBlockSelect<T extends boolean = true> {
+  background?: T;
+  title?: T;
+  description?: T;
+  viewButton?:
+    | T
+    | {
+        buttonText?: T;
+        url?: T;
+      };
+  id?: T;
+  blockName?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

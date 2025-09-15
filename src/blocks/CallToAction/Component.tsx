@@ -1,23 +1,45 @@
+"use client";
+
 import React from 'react'
 
-import type { CallToActionBlock as CTABlockProps } from '@/payload-types'
+import Image from 'next/image'
+import Button from '@/common/Button'
 
-import RichText from '@/components/RichText'
-import { CMSLink } from '@/components/Link'
+interface CTABlockProps {
+  background?: { url: string; alt: string; width?: number; height?: number }
+  title: string;
+  description: string;
+  viewButton: {
+    buttonText: string;
+    url: string;
+  };
+}
 
-export const CallToActionBlock: React.FC<CTABlockProps> = ({ links, richText }) => {
+export const CallToActionBlock: React.FC<CTABlockProps> = ({ background, title, description, viewButton }) => {
   return (
-    <div className="container">
-      <div className="bg-card rounded border-border border p-4 flex flex-col gap-8 md:flex-row md:justify-between md:items-center">
-        <div className="max-w-[48rem] flex items-center">
-          {richText && <RichText className="mb-0" data={richText} enableGutter={false} />}
-        </div>
-        <div className="flex flex-col gap-8">
-          {(links || []).map(({ link }, i) => {
-            return <CMSLink key={i} size="lg" {...link} />
-          })}
-        </div>
-      </div>
+    <div className="relative w-full mt-14">
+      {/* Chỉ render Image khi background và background.url tồn tại */}
+      {background?.url && (
+        <Image
+          src={background.url}
+          alt={background.alt || 'Call to action background'}
+          width={background.width}
+          height={background.height}
+          className={`w-full h-auto object-cover`}
+        />
+      )}
+      <Button size="md" variant='sky'
+        className="absolute top-[65%] right-[20%] text-[20px] leading-[27px] text-white"
+        onClick={() => window.location.href = `${viewButton.url}`}
+      >
+        {viewButton.buttonText}
+      </Button>
+      <h2 className="absolute top-[15%] left-[18%] text-[#d8e5ff] text-[40px] leading-[60px] font-semibold w-[660px]">
+        {title}
+      </h2>
+      <span className="absolute bottom-[20%] left-[18%] text-[#d8e5ff]">
+        {description}
+      </span>
     </div>
-  )
+  );
 }

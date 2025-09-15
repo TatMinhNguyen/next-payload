@@ -2,79 +2,54 @@ import React from 'react'
 import Image from 'next/image'
 
 type Testimonial = {
+  id: string
   name: string
   avatar?: any
   content: string
-  rating: number
+  occupation: string
 }
 
 type TestimonialsBlockProps = {
   title: string
+  subtitle?: string
   testimonials: Testimonial[]
 }
 
 export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = ({
   title,
+  subtitle,
   testimonials,
 }) => {
   return (
-    <div className="py-20 bg-gray-50">
-      <div className="container">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-800 mb-6">
-            {title}
-          </h2>
+    <div className="flex flex-col items-center gap-12 mt-14">
+      <div className="relative w-full flex items-center justify-center">
+        <div className="text-[150px] leading-[150px] text-[#f6f7fc] font-[900] select-none">
+          {subtitle}
         </div>
-
-        {/* Testimonials */}
-        <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow"
-            >
-              {/* Rating */}
-              <div className="flex mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <svg
-                    key={i}
-                    className="w-5 h-5 text-yellow-400"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
+        <h3 className="absolute top-[33%] text-[40px] leading-[60px] font-bold">
+          {title}
+        </h3>
+      </div>
+      <div className="grid grid-cols-3 gap-4 w-[1136px]">
+        {testimonials?.map((item) => {
+          return (
+            <div key={item.id} className="flex flex-col items-start gap-4">
+              <div className="py-[10px] px-6 rounded-2xl bg-[#F7F8FB] text-[22px] leading-[30px] font-medium ">
+                {item.content}
               </div>
-
-              {/* Content */}
-              <p className="text-gray-600 mb-6 leading-relaxed">
-                {testimonial.content}
-              </p>
-
-              {/* Author */}
-              <div className="flex items-center">
-                {testimonial.avatar && (
-                  <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
-                    <Image
-                      src={testimonial.avatar.url}
-                      alt={testimonial.avatar.alt || testimonial.name}
-                      width={48}
-                      height={48}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                )}
-                <div>
-                  <h4 className="font-semibold text-gray-800">
-                    {testimonial.name}
-                  </h4>
+              <div className="flex gap-2 px-6">
+                <Image src={item.avatar.url} alt=""
+                  width={item.avatar.width}
+                  height={item.avatar.height}
+                />
+                <div className="flex flex-col gap-1">
+                  <h4 className="leading-[24px] font-medium">{item.name}</h4>
+                  <span className="text-[14px] leading-[20px] font-normal">{item.occupation}</span>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
     </div>
   )

@@ -9,6 +9,12 @@ export const TestimonialsBlock: Block = {
       required: true,
     },
     {
+      name: 'subtitle',
+      type: 'text',
+      defaultValue: 'CLICKEE',
+      required: true,
+    },
+    {
       name: 'testimonials',
       type: 'array',
       fields: [
@@ -28,11 +34,12 @@ export const TestimonialsBlock: Block = {
           required: true,
         },
         {
-          name: 'rating',
-          type: 'number',
-          min: 1,
-          max: 5,
-          defaultValue: 5,
+          name: 'occupation',
+          type: 'text',
+          required: true,
+          admin: {
+            description: 'ví dụ: Giáo viên Thinkslab',
+          },
         },
       ],
     },

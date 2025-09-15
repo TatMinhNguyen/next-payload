@@ -166,8 +166,9 @@ export const HeroBlock: React.FC<{ banners: Banner[] }> = ({ banners }) => {
                 ))}
 
                 <button
-                  className={`${banner.buttonClass} text-white px-6 py-2 pb-2.5 rounded-[12px] cursor-pointer text-[22px] leading-[30px] font-[600]`}
+                  className={`text-white px-6 py-2 pb-2.5 rounded-[12px] cursor-pointer text-[22px] leading-[30px] font-[600]`}
                   onClick={() => handleClickButton(banner.buttonText)}
+                  style={{ backgroundColor: banner.buttonClass }}
                 >
                   {banner.buttonText}
                 </button>
