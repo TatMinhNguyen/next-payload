@@ -2,15 +2,17 @@ import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
 import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
-import { FormBlock } from '../../blocks/Form/config'
+// import { FormBlock } from '../../blocks/Form/config'
 // import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { CallToAction } from '@/blocks/CallToAction/config'
-import { HeroBlock } from '../../blocks/Hero/config'
-import { FeaturesBlock } from '../../blocks/Features/config'
-import { ServiceBlock } from '../../blocks/Service/config'
-import { PricingBlock } from '../../blocks/Pricing/config'
-import { TestimonialsBlock } from '../../blocks/Testimonials/config'
-import { FAQBlock } from '../../blocks/FAQ/config'
+import { HeroBlock } from '@/blocks/Hero/config'
+import { FeaturesBlock } from '@/blocks/Features/config'
+import { ServiceBlock } from '@/blocks/Service/config'
+import { PricingBlock } from '@/blocks/Pricing/config'
+import { TestimonialsBlock } from '@/blocks/Testimonials/config'
+import { FAQBlock } from '@/blocks/FAQ/config'
+import { HeroSectionOfToolBlock } from '@/blocks/HeroSectionOfTool/config'
+import { IELTSFeaturesBlock } from '@/blocks/IELTSFeatures/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -87,10 +89,12 @@ export const Pages: CollectionConfig<'pages'> = {
                 TestimonialsBlock,
                 FAQBlock,
                 CallToAction,
+                HeroSectionOfToolBlock,
+                IELTSFeaturesBlock,
                 // Content,
                 // MediaBlock,
                 // Archive,
-                FormBlock,
+                // FormBlock,
               ],
               required: true,
               admin: {

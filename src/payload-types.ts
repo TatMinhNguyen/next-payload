@@ -378,7 +378,67 @@ export interface Page {
         blockType: 'faq';
       }
     | CallToActionBlock
-    | FormBlock
+    | {
+        background: {
+          /**
+           * Ví dụ: #36A6FF
+           */
+          backgroundColor: string;
+          /**
+           * Ví dụ: #36A6FF
+           */
+          mainColor: string;
+        };
+        toolName: {
+          name: string;
+          /**
+           * Ví dụ: #36A6FF
+           */
+          color: string;
+        };
+        title: string;
+        contents?:
+          | {
+              content: string;
+              icon: string | Media;
+              id?: string | null;
+            }[]
+          | null;
+        viewButton: {
+          buttonText?: string | null;
+          url?: string | null;
+        };
+        image: string | Media;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'heroSectionOfTool';
+      }
+    | {
+        title: string;
+        subtitle: string;
+        features?:
+          | {
+              image: string | Media;
+              title: string;
+              /**
+               * Ví dụ: #36A6FF
+               */
+              titleColor: string;
+              description: {
+                description: string;
+                id?: string | null;
+              }[];
+              viewButton: {
+                buttonText?: string | null;
+                url?: string | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'IELTSFeatures';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -598,29 +658,29 @@ export interface CallToActionBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "FormBlock".
+ * via the `definition` "redirects".
  */
-export interface FormBlock {
-  form: string | Form;
-  enableIntro?: boolean | null;
-  introContent?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  id?: string | null;
-  blockName?: string | null;
-  blockType: 'formBlock';
+export interface Redirect {
+  id: string;
+  /**
+   * You will need to rebuild the website when changing this field.
+   */
+  from: string;
+  to?: {
+    type?: ('reference' | 'custom') | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: string | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: string | Post;
+        } | null);
+    url?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -793,32 +853,6 @@ export interface Form {
         id?: string | null;
       }[]
     | null;
-  updatedAt: string;
-  createdAt: string;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "redirects".
- */
-export interface Redirect {
-  id: string;
-  /**
-   * You will need to rebuild the website when changing this field.
-   */
-  from: string;
-  to?: {
-    type?: ('reference' | 'custom') | null;
-    reference?:
-      | ({
-          relationTo: 'pages';
-          value: string | Page;
-        } | null)
-      | ({
-          relationTo: 'posts';
-          value: string | Post;
-        } | null);
-    url?: string | null;
-  };
   updatedAt: string;
   createdAt: string;
 }
@@ -1259,7 +1293,67 @@ export interface PagesSelect<T extends boolean = true> {
               blockName?: T;
             };
         cta?: T | CallToActionBlockSelect<T>;
-        formBlock?: T | FormBlockSelect<T>;
+        heroSectionOfTool?:
+          | T
+          | {
+              background?:
+                | T
+                | {
+                    backgroundColor?: T;
+                    mainColor?: T;
+                  };
+              toolName?:
+                | T
+                | {
+                    name?: T;
+                    color?: T;
+                  };
+              title?: T;
+              contents?:
+                | T
+                | {
+                    content?: T;
+                    icon?: T;
+                    id?: T;
+                  };
+              viewButton?:
+                | T
+                | {
+                    buttonText?: T;
+                    url?: T;
+                  };
+              image?: T;
+              id?: T;
+              blockName?: T;
+            };
+        IELTSFeatures?:
+          | T
+          | {
+              title?: T;
+              subtitle?: T;
+              features?:
+                | T
+                | {
+                    image?: T;
+                    title?: T;
+                    titleColor?: T;
+                    description?:
+                      | T
+                      | {
+                          description?: T;
+                          id?: T;
+                        };
+                    viewButton?:
+                      | T
+                      | {
+                          buttonText?: T;
+                          url?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
       };
   meta?:
     | T
@@ -1289,17 +1383,6 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
         buttonText?: T;
         url?: T;
       };
-  id?: T;
-  blockName?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "FormBlock_select".
- */
-export interface FormBlockSelect<T extends boolean = true> {
-  form?: T;
-  enableIntro?: T;
-  introContent?: T;
   id?: T;
   blockName?: T;
 }

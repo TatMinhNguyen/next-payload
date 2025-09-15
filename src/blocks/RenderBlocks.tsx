@@ -13,6 +13,8 @@ import ServiceBlock from '@/blocks/Service/Component'
 import { PricingBlock } from '@/blocks/Pricing/Component'
 import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
 import { FAQBlock } from '@/blocks/FAQ/Component'
+import { HeroSectionOfToolBlock } from './HeroSectionOfTool/Component'
+import { IELTSFeaturesBlock } from './IELTSFeatures/Component'
 
 const blockComponents = {
   hero: HeroBlock,
@@ -26,6 +28,8 @@ const blockComponents = {
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  heroSectionOfTool: HeroSectionOfToolBlock,
+  IELTSFeatures: IELTSFeaturesBlock,
 }
 
 export const RenderBlocks: React.FC<{
