@@ -110,7 +110,7 @@ export const HeroBlock: React.FC<{ banners: Banner[] }> = ({ banners }) => {
               {/* Background */}
               {banner.background?.url && (
                 <Image
-                  src={`${CMS_URL}${banner.background.url}`}
+                  src={banner.background.url}
                   alt={banner.background.alt || 'banner background'}
                   fill
                   className="object-cover"

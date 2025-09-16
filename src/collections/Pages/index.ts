@@ -26,6 +26,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
+import { CTAOfToolBlock } from '@/blocks/CTAOfTool/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -91,6 +92,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 CallToAction,
                 HeroSectionOfToolBlock,
                 IELTSFeaturesBlock,
+                CTAOfToolBlock,
                 // Content,
                 // MediaBlock,
                 // Archive,

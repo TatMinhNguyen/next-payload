@@ -225,8 +225,8 @@ export interface Page {
         description?: string | null;
         features?:
           | {
-              title: string;
-              description: string;
+              title?: string | null;
+              description?: string | null;
               icon?: (string | null) | Media;
               color?: ('blue' | 'green' | 'orange' | 'pink' | 'purple') | null;
               id?: string | null;
@@ -438,6 +438,22 @@ export interface Page {
         id?: string | null;
         blockName?: string | null;
         blockType: 'IELTSFeatures';
+      }
+    | {
+        background: string | Media;
+        title: string;
+        description: string;
+        button: {
+          viewButton: {
+            buttonText?: string | null;
+            buttonColor?: ('primary' | 'green' | 'secondary' | 'danger' | 'ghost' | 'navy' | 'sky') | null;
+            url?: string | null;
+          };
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'CTAOfTool';
       }
   )[];
   meta?: {
@@ -1347,6 +1363,27 @@ export interface PagesSelect<T extends boolean = true> {
                       | T
                       | {
                           buttonText?: T;
+                          url?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        CTAOfTool?:
+          | T
+          | {
+              background?: T;
+              title?: T;
+              description?: T;
+              button?:
+                | T
+                | {
+                    viewButton?:
+                      | T
+                      | {
+                          buttonText?: T;
+                          buttonColor?: T;
                           url?: T;
                         };
                     id?: T;

@@ -76,4 +76,8 @@ export const IELTSFeaturesBlock: Block = {
       ],
     },
   ],
+  labels: {
+    plural: 'IELTS Features Block',
+    singular: 'IELTS Features Block',
+  },
 }

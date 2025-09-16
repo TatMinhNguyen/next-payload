@@ -16,7 +16,12 @@ type FAQBlockProps = {
 }
 
 export const FAQBlock: React.FC<FAQBlockProps> = ({ title, questions }) => {
-  const [openQuestions, setOpenQuestions] = useState<Record<string, boolean>>({ 1: true });
+  const [openQuestions, setOpenQuestions] = useState<Record<string, boolean>>(() => {
+    if (questions && questions.length > 0) {
+      return { [questions[0].id]: true };
+    }
+    return {};
+  });
 
   const toggleQuestion = (id: string) => {
     setOpenQuestions(prev => {

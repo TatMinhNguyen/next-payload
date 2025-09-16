@@ -23,12 +23,10 @@ export const FeaturesBlock: Block = {
         {
           name: 'title',
           type: 'text',
-          required: true,
         },
         {
           name: 'description',
           type: 'textarea',
-          required: true,
         },
         {
           name: 'icon',

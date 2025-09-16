@@ -43,15 +43,17 @@ export const FeaturesBlock: React.FC<FeaturesBlockProps> = ({
             {title}
           </h3>
         </div>
-        <div className="text-center max-w-[1024px]">
-          {description}
-        </div>
+        {description &&
+          <div className="text-center max-w-[1024px]">
+            {description}
+          </div>
+        }
       </div>
 
       <div className="flex items-start justify-between h-[488px]">
         {/* Features List */}
-        <div className="flex flex-col gap-4 w-[376px] ml-[4%]">
-          {features.map((feature, index) => (
+        <div className={`flex flex-col gap-4 w-[376px] ml-[4%] ${!!features?.[0].title ? "" : "mt-[4%]"}`}>
+          {features?.map((feature, index) => (
             <div
               key={index}
               className={`${colorClasses[feature.color]} flex gap-4 p-4 rounded-t-[32px] rounded-bl-[32px] items-center justify-start text-white`}
@@ -65,9 +67,13 @@ export const FeaturesBlock: React.FC<FeaturesBlockProps> = ({
                 // className="w-10 h-10"
                 />
               )}
-              <span className="font-bold">
-                {feature.title} - <span className="font-normal">{feature.description}</span>
-              </span>
+              {!!feature.title ? (
+                <span className="font-bold">
+                  {feature.title} - <span className="font-medium">{feature.description}</span>
+                </span>
+              ) : (
+                <span className="font-medium">{feature.description}</span>
+              )}
             </div>
           ))}
         </div>

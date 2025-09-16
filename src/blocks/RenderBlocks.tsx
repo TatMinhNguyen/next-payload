@@ -15,6 +15,7 @@ import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
 import { FAQBlock } from '@/blocks/FAQ/Component'
 import { HeroSectionOfToolBlock } from './HeroSectionOfTool/Component'
 import { IELTSFeaturesBlock } from './IELTSFeatures/Component'
+import { CTAComponentBlock } from './CTAOfTool/Component'
 
 const blockComponents = {
   hero: HeroBlock,
@@ -30,6 +31,7 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   heroSectionOfTool: HeroSectionOfToolBlock,
   IELTSFeatures: IELTSFeaturesBlock,
+  CTAOfTool: CTAComponentBlock,
 }
 
 export const RenderBlocks: React.FC<{
