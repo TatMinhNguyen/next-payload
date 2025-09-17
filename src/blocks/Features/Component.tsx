@@ -39,7 +39,7 @@ export const FeaturesBlock: React.FC<FeaturesBlockProps> = ({
           <div className="text-[150px] leading-[150px] text-[#f6f7fc] font-[900] select-none">
             {subtitle}
           </div>
-          <h3 className="absolute top-[33%] text-[40px] leading-[60px] font-bold">
+          <h3 className="absolute top-[33%] text-[40px] leading-[60px] text-center font-bold">
             {title}
           </h3>
         </div>
