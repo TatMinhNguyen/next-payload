@@ -455,6 +455,146 @@ export interface Page {
         blockName?: string | null;
         blockType: 'CTAOfTool';
       }
+    | {
+        background: string | Media;
+        title: string;
+        description: string;
+        button: {
+          viewButton: {
+            buttonText?: string | null;
+            buttonColor?: ('primary' | 'green' | 'secondary' | 'danger' | 'ghost' | 'navy' | 'sky') | null;
+            url?: string | null;
+          };
+          id?: string | null;
+        }[];
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'CTAOfPricing';
+      }
+    | {
+        role?:
+          | {
+              title: string;
+              selectedRole?: ('student' | 'teacher' | 'business') | null;
+              id?: string | null;
+            }[]
+          | null;
+        packageType?:
+          | {
+              type: 'base' | 'addon';
+              title: string;
+              description: string;
+              students?: {
+                packages?:
+                  | {
+                      /**
+                       * Ví dụ: 1, 3, 6, 12 tương đương với 1 tháng, 3 tháng, 6 tháng, 12 tháng
+                       */
+                      duration?: string | null;
+                      /**
+                       * Ví dụ: 100, 300 tương đương với 100 lượt chấm, 300 lượt chấm
+                       */
+                      submissions?: string | null;
+                      originalPrice: string;
+                      discountPrice: string;
+                      currency?: string | null;
+                      ctaText?: string | null;
+                      /**
+                       * Ví dụ: #3A18CE
+                       */
+                      ctaColor?: string | null;
+                      ctaUrl?: string | null;
+                      id?: string | null;
+                    }[]
+                  | null;
+                features?:
+                  | {
+                      feature: string;
+                      id?: string | null;
+                    }[]
+                  | null;
+                warning?:
+                  | {
+                      warningText?: string | null;
+                      id?: string | null;
+                    }[]
+                  | null;
+              };
+              teachers?: {
+                packages?:
+                  | {
+                      /**
+                       * Ví dụ: 1, 3, 6, 12 tương đương với 1 tháng, 3 tháng, 6 tháng, 12 tháng
+                       */
+                      duration?: string | null;
+                      /**
+                       * Ví dụ: 100, 300 tương đương với 100 lượt chấm, 300 lượt chấm
+                       */
+                      submissions?: string | null;
+                      originalPrice: string;
+                      discountPrice: string;
+                      currency?: string | null;
+                      ctaText?: string | null;
+                      /**
+                       * Ví dụ: #3A18CE
+                       */
+                      ctaColor?: string | null;
+                      ctaUrl?: string | null;
+                      id?: string | null;
+                    }[]
+                  | null;
+                features?:
+                  | {
+                      feature: string;
+                      id?: string | null;
+                    }[]
+                  | null;
+                warning?:
+                  | {
+                      warningText?: string | null;
+                      id?: string | null;
+                    }[]
+                  | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
+        business: {
+          descriptions: string;
+          input?:
+            | {
+                inputName: string;
+                /**
+                 * Ví dụ: email, .....
+                 */
+                inputType: string;
+                id?: string | null;
+              }[]
+            | null;
+          viewButton?: {
+            ctaText?: string | null;
+            ctaUrl?: string | null;
+          };
+        };
+        isDiscount?: boolean | null;
+        /**
+         * Ví dụ: Nhập mã CLICKEE29 giảm 30%
+         */
+        discountNote?: string | null;
+        discountPeriod?: {
+          /**
+           * Ngày bắt đầu khuyến mãi
+           */
+          startDate?: string | null;
+          /**
+           * Ngày kết thúc khuyến mãi
+           */
+          endDate?: string | null;
+        };
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'DetailPricing';
+      }
   )[];
   meta?: {
     title?: string | null;
@@ -1387,6 +1527,132 @@ export interface PagesSelect<T extends boolean = true> {
                           url?: T;
                         };
                     id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        CTAOfPricing?:
+          | T
+          | {
+              background?: T;
+              title?: T;
+              description?: T;
+              button?:
+                | T
+                | {
+                    viewButton?:
+                      | T
+                      | {
+                          buttonText?: T;
+                          buttonColor?: T;
+                          url?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+              blockName?: T;
+            };
+        DetailPricing?:
+          | T
+          | {
+              role?:
+                | T
+                | {
+                    title?: T;
+                    selectedRole?: T;
+                    id?: T;
+                  };
+              packageType?:
+                | T
+                | {
+                    type?: T;
+                    title?: T;
+                    description?: T;
+                    students?:
+                      | T
+                      | {
+                          packages?:
+                            | T
+                            | {
+                                duration?: T;
+                                submissions?: T;
+                                originalPrice?: T;
+                                discountPrice?: T;
+                                currency?: T;
+                                ctaText?: T;
+                                ctaColor?: T;
+                                ctaUrl?: T;
+                                id?: T;
+                              };
+                          features?:
+                            | T
+                            | {
+                                feature?: T;
+                                id?: T;
+                              };
+                          warning?:
+                            | T
+                            | {
+                                warningText?: T;
+                                id?: T;
+                              };
+                        };
+                    teachers?:
+                      | T
+                      | {
+                          packages?:
+                            | T
+                            | {
+                                duration?: T;
+                                submissions?: T;
+                                originalPrice?: T;
+                                discountPrice?: T;
+                                currency?: T;
+                                ctaText?: T;
+                                ctaColor?: T;
+                                ctaUrl?: T;
+                                id?: T;
+                              };
+                          features?:
+                            | T
+                            | {
+                                feature?: T;
+                                id?: T;
+                              };
+                          warning?:
+                            | T
+                            | {
+                                warningText?: T;
+                                id?: T;
+                              };
+                        };
+                    id?: T;
+                  };
+              business?:
+                | T
+                | {
+                    descriptions?: T;
+                    input?:
+                      | T
+                      | {
+                          inputName?: T;
+                          inputType?: T;
+                          id?: T;
+                        };
+                    viewButton?:
+                      | T
+                      | {
+                          ctaText?: T;
+                          ctaUrl?: T;
+                        };
+                  };
+              isDiscount?: T;
+              discountNote?: T;
+              discountPeriod?:
+                | T
+                | {
+                    startDate?: T;
+                    endDate?: T;
                   };
               id?: T;
               blockName?: T;

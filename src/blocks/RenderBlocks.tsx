@@ -16,6 +16,8 @@ import { FAQBlock } from '@/blocks/FAQ/Component'
 import { HeroSectionOfToolBlock } from './HeroSectionOfTool/Component'
 import { IELTSFeaturesBlock } from './IELTSFeatures/Component'
 import { CTAComponentBlock } from './CTAOfTool/Component'
+import { CTAComponentPricingBlock } from './CTAOfTool/Components/CTAOfPricing'
+import { PricingDetailBlock } from './DetailPricing/Component'
 
 const blockComponents = {
   hero: HeroBlock,
@@ -32,6 +34,8 @@ const blockComponents = {
   heroSectionOfTool: HeroSectionOfToolBlock,
   IELTSFeatures: IELTSFeaturesBlock,
   CTAOfTool: CTAComponentBlock,
+  CTAOfPricing: CTAComponentPricingBlock,
+  DetailPricing: PricingDetailBlock,
 }
 
 export const RenderBlocks: React.FC<{

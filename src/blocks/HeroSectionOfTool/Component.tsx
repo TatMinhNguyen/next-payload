@@ -45,7 +45,7 @@ export const HeroSectionOfToolBlock: React.FC<BannerProps> = ({
   viewButton,
   image,
 }) => {
-  console.log(background)
+
   const router = useRouter()
   return (
     <div className={`py-10 px-4`}

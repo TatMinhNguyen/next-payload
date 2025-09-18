@@ -13,6 +13,9 @@ import { TestimonialsBlock } from '@/blocks/Testimonials/config'
 import { FAQBlock } from '@/blocks/FAQ/config'
 import { HeroSectionOfToolBlock } from '@/blocks/HeroSectionOfTool/config'
 import { IELTSFeaturesBlock } from '@/blocks/IELTSFeatures/config'
+import { CTAOfPricingBlock, CTAOfToolBlock } from '@/blocks/CTAOfTool/config'
+import { DetailPricingBlock } from '@/blocks/DetailPricing/config'
+
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -26,7 +29,6 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import { CTAOfToolBlock } from '@/blocks/CTAOfTool/config'
 
 export const Pages: CollectionConfig<'pages'> = {
   slug: 'pages',
@@ -93,6 +95,8 @@ export const Pages: CollectionConfig<'pages'> = {
                 HeroSectionOfToolBlock,
                 IELTSFeaturesBlock,
                 CTAOfToolBlock,
+                CTAOfPricingBlock,
+                DetailPricingBlock,
                 // Content,
                 // MediaBlock,
                 // Archive,
