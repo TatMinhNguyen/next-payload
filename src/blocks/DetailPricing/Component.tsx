@@ -1,6 +1,11 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import Button from '@/common/Button'
+import React, { useEffect, useState } from 'react'
+
+import { StudentComponent } from './Components/StudentComponent'
+import { TeacherComponent } from './Components/TeacherComponent'
+import { BusinessComponent } from './Components/BusinessComponent'
 
 interface PricingBlockProps {
   role: Role[],
@@ -23,8 +28,8 @@ type PackageType = {
   type: string,
   title: string,
   description: string,
-  students: Students[],
-  teachers: Teachers[],
+  students: Students,
+  teachers: Teachers,
 }
 
 type Students = {
@@ -39,7 +44,7 @@ type Students = {
     ctaColor?: string
     ctaUrl?: string
   }[],
-  feature: {
+  features: {
     feature: string
     id?: string
   }[],
@@ -62,7 +67,7 @@ type Teachers = {
     ctaColor?: string
     ctaUrl?: string
   }[],
-  feature: {
+  features: {
     feature: string
     id?: string
   }[],
@@ -75,6 +80,12 @@ type Teachers = {
 type Business = {
   title: string,
   selectedBusiness: string,
+}
+
+const CONSTANS = {
+  TEACHER: 'teacher',
+  STUDENT: 'student',
+  BUSINESS: 'business',
 }
 
 export const PricingDetailBlock: React.FC<PricingBlockProps> = (props) => {
@@ -91,10 +102,17 @@ export const PricingDetailBlock: React.FC<PricingBlockProps> = (props) => {
     seconds: 0,
   })
 
+  const [selectedRole, setSelectedRole] = useState(CONSTANS.STUDENT)
+
   const totalPrices = (discountPrice: string, duration: string) => {
     const price = parseFloat(discountPrice) || 0
     const months = parseInt(duration, 10) || 0
-    return Math.round(price * months)
+    return formatMoney(Math.round(price * months));
+  }
+
+  function formatMoney(amount: number | string) {
+    if (!amount) return "";
+    return new Intl.NumberFormat('vi-VN').format(Number(amount));
   }
 
   useEffect(() => {
@@ -134,11 +152,73 @@ export const PricingDetailBlock: React.FC<PricingBlockProps> = (props) => {
       return () => clearInterval(timer)
     }
   }, [isDiscount, discountPeriod])
+
+  const rendertype = (type: string) => {
+    if (type === "base") {
+      return "tháng"
+    } else {
+      return "lượt chấm"
+    }
+  }
+
   return (
     <div className="flex flex-col items-center gap-10 mt-14">
       {packageType?.map((pkgType, index) => (
-        <div key={index}>
-
+        <div key={index}
+          className="flex flex-col gap-6 items-center"
+        >
+          <div className="flex flex-col gap-2 max-w-[600px]">
+            <h3 className="text-[36px] leading-[44px] text-center">
+              {pkgType.title}
+            </h3>
+            <p className="text-center">
+              {pkgType.description}
+            </p>
+          </div>
+          {pkgType.type === 'base' && (
+            <div className="flex gap-4">
+              {role?.map((role, index) => (
+                <Button key={index} variant={selectedRole === role.selectedRole ? 'navy' : 'ghost'}
+                  onClick={() => {
+                    setSelectedRole(role.selectedRole)
+                  }}
+                >
+                  {role.title}
+                </Button>
+              ))}
+            </div>
+          )}
+          {selectedRole === CONSTANS.STUDENT ? (
+            <StudentComponent
+              packages={pkgType.students.packages}
+              features={pkgType.students.features}
+              warning={pkgType.students.warning}
+              type={pkgType.type}
+              isDiscount={isDiscount}
+              discountNote={discountNote}
+              countdownMessage={countdownMessage}
+              timeLeft={timeLeft}
+              formatMoney={formatMoney}
+              totalPrices={totalPrices}
+              rendertype={rendertype}
+            />
+          ) : selectedRole === CONSTANS.TEACHER ? (
+            <TeacherComponent
+              packages={pkgType.teachers.packages}
+              features={pkgType.teachers.features}
+              warning={pkgType.teachers.warning}
+              type={pkgType.type}
+              isDiscount={isDiscount}
+              discountNote={discountNote}
+              countdownMessage={countdownMessage}
+              timeLeft={timeLeft}
+              formatMoney={formatMoney}
+              totalPrices={totalPrices}
+              rendertype={rendertype}
+            />
+          ) : (
+            <BusinessComponent />
+          )}
         </div>
       ))}
     </div>
